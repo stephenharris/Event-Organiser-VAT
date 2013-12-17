@@ -3,7 +3,7 @@
  * Plugin Name: Event Organiser VAT
  * Plugin URI:  http://wp-event-organiser.com
  * Description: Adds VAT to Event Organiser Pro
- * Version:     0.1.0
+ * Version:     0.1.0.b-1
  * Author:      Stephen Harris
  * Author URI:  http://wp-event-organiser.com
  * License:     GPLv2+
@@ -30,7 +30,7 @@
  */
 
 // Useful global constants
-define( 'EVENTORGANISERVAT_VERSION', '0.1.0' );
+define( 'EVENTORGANISERVAT_VERSION', '0.1.0.b-1' );
 define( 'EVENTORGANISERVAT_URL', plugin_dir_url( __FILE__ ) );
 define( 'EVENTORGANISERVAT_DIR', plugin_dir_path( __FILE__ ) );
 

@@ -3,7 +3,7 @@
 **Donate link:** http://wp-event-organiser.com  
 **Requires at least:** 3.3  
 **Tested up to:** 3.8  
-**Stable tag:** 0.1.0  
+**Stable tag:** 0.1.0-b-1  
 **License:** GPLv2 or later  
 
 Adds VAT to Event Organiser Pro
@@ -11,6 +11,7 @@ Adds VAT to Event Organiser Pro
 ## Description ##
 
 Allows you to set a VAT rate to be automatically added to the total checkout price. Ticket prices should be given without VAT applied when set in the admin.
+To set the VAT rate go to *Settings > Event Organiser > Bookings*.
 
 ## Installation ##
 
