@@ -79,9 +79,11 @@ module.exports = function( grunt ) {
 				},
 			},
 		},
+		
 		clean: {
 			main: ['build/<%= pkg.name %>']
 		},
+		
 		copy: {
 			// Copy the plugin to a versioned release directory
 			main: {
@@ -147,22 +149,22 @@ module.exports = function( grunt ) {
 				],
     			},
 	    	files:{
-			src:  [
+	    		src:  [
 				'**/*.php',
 				'!node_modules/**',
 				'!build/**',
 				'!tests/**',
 				'!vendor/**',
 				'!*~',
-			],
-		expand: true,
+				],
+				expand: true,
     		}
     	},
 
-	checktextdomain: {
-		options:{
-			text_domain: 'eventorganiservat',
-			keywords: [
+    	checktextdomain: {
+    		options:{
+    			text_domain: 'eventorganiservat',
+    			keywords: [
 				'__:1,2d',
 				'_e:1,2d',
 				'_x:1,2c,3d',
@@ -177,51 +179,53 @@ module.exports = function( grunt ) {
 				'_nx:1,2,4c,5d',
 				'_n_noop:1,2,3d',
 				'_nx_noop:1,2,3c,4d'
-			],
-		},
-		files: {
-			src:  [
+				],
+    		},
+    		files: {
+    			src:  [
 				'**/*.php',
 				'!node_modules/**',
 				'!build/**',
 				'!tests/**',
 				'!vendor/**',
 				'!*~',
-			],
-			expand: true,
-		},
-	},
+				],
+				expand: true,
+    		},
+    	},
 
-	wp_readme_to_markdown: {
-		convert:{
-			files: {
-				'readme.md': 'readme.txt'
-			},
-		},
-	},
+    	wp_readme_to_markdown: {
+    		convert:{
+    			files: {
+    				'readme.md': 'readme.txt'
+    			},
+    		},
+    	},
 
-	checkrepo: {
-		deploy: {
-			tag: {
-				eq: '<%= pkg.version %>',    // Check if highest repo tag is equal to pkg.version
-			},
-			tagged: true, // Check if last repo commit (HEAD) is not tagged
-			clean: true,   // Check if the repo working directory is clean
+    	checkrepo: {
+    		deploy: {
+    			tag: {
+    				eq: '<%= pkg.version %>',    // Check if highest repo tag is equal to pkg.version
+    			},
+    			tagged: true, // Check if last repo commit (HEAD) is not tagged
+    			clean: true,   // Check if the repo working directory is clean
         	}
-	},
+    	},
 	
-    checkwpversion: {
-		plugin_equals_stable: {
-		    version1: 'plugin',
-		    version2: 'readme',
-			compare: '!=',
-		},
-		plugin_equals_package: {
-		    version1: 'plugin',
-		    version2: '<%= pkg.version %>',
-			compare: '==',
-		},
-    },
+    	checkwpversion: {
+    		plugin_equals_stable: {
+    			version1: 'plugin',
+    			version2: 'readme',
+    			compare: '!=',
+    		},
+    		plugin_equals_package: {
+    			version1: 'plugin',
+    			version2: '<%= pkg.version %>',
+    			compare: '==',
+    		},
+    	},
+    
+    
     
 
 } );
@@ -232,9 +236,9 @@ module.exports = function( grunt ) {
 	
 	grunt.registerTask( 'test', [ 'jshint', 'checktextdomain' ] );
 
-	grunt.registerTask( 'build', [ 'test', 'newer:uglify', 'newer:cssmin', 'pot', 'newer:po2mo', 'wp_readme_to_markdown', 'clean', 'copy' ] );
+	grunt.registerTask( 'build', [ 'test', 'newer:uglify', 'newer:cssmin', 'pot', 'newer:po2mo', 'wp_readme_to_markdown', 'clean', 'copy', 'compress' ] );
 
-	grunt.registerTask( 'deploy', [ 'checkwpversion', 'checkbranch:master', 'checkrepo:deploy', 'build', 'compress' ] );
+	grunt.registerTask( 'deploy', [ 'checkwpversion', 'checkbranch:master', 'checkrepo:deploy', 'build' ] );
 
 	grunt.util.linefeed = '\n';
 };
