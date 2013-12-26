@@ -22,6 +22,6 @@ jQuery(document).ready(function($){
 
 		return cart;
 				
-	});
+	}, 100 );
 
 });

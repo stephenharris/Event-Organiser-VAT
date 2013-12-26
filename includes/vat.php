@@ -54,7 +54,7 @@ function _eventorganiservat_vat_row( $event_id, $form ){
 	//Enqueue scripts
 	wp_enqueue_script( 'eo_pro_vat' );
 }
-add_action( 'eventorganiser_booking_pre_total_row', '_eventorganiservat_vat_row', 10, 2 );
+add_action( 'eventorganiser_booking_pre_total_row', '_eventorganiservat_vat_row', 500, 2 );
 
 
 /**
