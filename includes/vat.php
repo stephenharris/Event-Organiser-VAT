@@ -32,6 +32,7 @@ function _eventorganiservat_vat_row( $event_id, $form ){
 	//Get currency symbol
 	$currency = eventorganiser_pro_get_option( 'currency' );
 	$symbol = eventorganiser_get_currency_symbol( $currency );
+	$placeholder = ( eventorganiser_pro_get_option( 'currency_position' ) == 1 ? '%1$s%2$s' : '%2$s%1$s' );
 	
 	//'VAT' row
 	?>
@@ -39,12 +40,7 @@ function _eventorganiservat_vat_row( $event_id, $form ){
 			
 			<td><strong> <?php printf( esc_html__( 'VAT (%d%%)', 'eventorganiservat' ), eventorganiservat_get_vat_percent() ); ?></strong></td>
 			
-			<td> 
-				<?php 
-				$placeholder = ( eventorganiser_pro_get_option( 'currency_position' ) == 1 ? '%1$s %2$s' : '%2$s %1$s' );
-				printf( $placeholder, $symbol, '<span id="eo-booking-vat"></span>' );
-				?>
-			</td>
+			<td> <?php printf( $placeholder, $symbol, '<span id="eo-booking-vat"></span>' ); ?></td>
 			
 			<td></td>
 			
