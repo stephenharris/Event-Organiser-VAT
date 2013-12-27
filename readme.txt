@@ -3,10 +3,10 @@ Contributors: stephenharris
 Donate link: http://wp-event-organiser.com
 Requires at least: 3.3
 Tested up to: 3.8
-Stable tag: 0.1.0-b-1
+Stable tag: 1.0.0
 License: GPLv2 or later
 
-Adds VAT to Event Organiser Pro
+Adds VAT to booking checkout. Requires Event Organiser & Event Organiser Pro
 
 == Description ==
 
