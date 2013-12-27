@@ -129,8 +129,8 @@ module.exports = function( grunt ) {
 
 		pot: {
 			options:{
-	        		text_domain: 'eventorganiservat',
-		        	dest: 'languages/',
+	        	text_domain: 'event-organiser-vat',
+		        dest: 'languages/',
 				keywords: [
 					'__:1',
 					'_e:1',
@@ -163,7 +163,8 @@ module.exports = function( grunt ) {
 
     	checktextdomain: {
     		options:{
-    			text_domain: 'eventorganiservat',
+    			text_domain: 'event-organiser-vat',
+    			correct_domain: true,
     			keywords: [
 				'__:1,2d',
 				'_e:1,2d',

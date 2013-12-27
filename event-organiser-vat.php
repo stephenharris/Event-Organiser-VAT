@@ -43,7 +43,7 @@ require_once( EVENTORGANISERVAT_DIR . 'admin/settings.php' );
  */
 function eventorganiservat_init() {
 	
-	load_plugin_textdomain( 'eventorganiservat', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+	load_plugin_textdomain( 'event-organiser-vat', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
 	$version = defined( 'EVENTORGANISERVAT_VERSION' ) ? EVENTORGANISERVAT_VERSION : false;
 	$ext = (defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG) ? '' : '.min';

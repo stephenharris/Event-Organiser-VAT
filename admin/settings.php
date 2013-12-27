@@ -15,7 +15,7 @@ function eventorganiservat_add_settings_fields(){
 	
 	add_settings_field( 
 		'eo-vat-percent',  
-		__( 'VAT (%)', 'eventorganiservat' ), 
+		__( 'VAT (%)', 'event-organiser-vat' ), 
 		'eventorganiser_text_field' , 
 		'eventorganiser_bookings', 
 		'bookings',

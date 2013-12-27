@@ -38,7 +38,7 @@ function _eventorganiservat_vat_row( $event_id, $form ){
 	?>
 		<tr class="eo-booking-vat-row" style="display:none;">
 			
-			<td><strong> <?php printf( esc_html__( 'VAT (%d%%)', 'eventorganiservat' ), eventorganiservat_get_vat_percent() ); ?></strong></td>
+			<td><strong> <?php printf( esc_html__( 'VAT (%d%%)', 'event-organiser-vat' ), eventorganiservat_get_vat_percent() ); ?></strong></td>
 			
 			<td> <?php printf( $placeholder, $symbol, '<span id="eo-booking-vat"></span>' ); ?></td>
 			
@@ -112,7 +112,7 @@ function _eventorganiservat_append_vat_row_to_email( $rows, $booking_id ){
 		
 		$rows .= sprintf( 
 			'<tr> <td>%s</td> <td>%s</td> <td></td> </tr>',
-			__( 'VAT', 'eventorganiservat' ),
+			__( 'VAT', 'event-organiser-vat' ),
 			eo_format_price( floatval( $vat_amount ) )
 		);
 	}
