@@ -40,29 +40,7 @@ module.exports = function( grunt ) {
 			},
 		},
 		
-		cssmin: {
-			options: {
-				banner: '/*! <%= pkg.title %> - v<%= pkg.version %>\n' +
-					' * <%= pkg.homepage %>\n' +
-					' */\n'
-			},
-			minify: {
-				expand: true,
-				src: ['assets/css/*.css', '!assets/css/*.min.css'],
-				ext: '.min.css'
-			}
-		},
-
-		watch:  {
-
-			styles: {
-				files: ['assets/css/*.css'],
-				tasks: ['cssmin'],
-				options: {
-					debounceDelay: 500
-				}
-			},
-			
+		watch:  {			
     			readme: {
     	    			files: ['readme.txt'],
     	    			tasks: ['wp_readme_to_markdown'],
@@ -107,6 +85,7 @@ module.exports = function( grunt ) {
 				dest: 'build/<%= pkg.name %>/'
 			}		
 		},
+
 		compress: {
 			main: {
 				options: {
@@ -225,9 +204,6 @@ module.exports = function( grunt ) {
     			compare: '==',
     		},
     	},
-    
-    
-    
 
 } );
 	
