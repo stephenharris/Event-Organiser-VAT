@@ -209,11 +209,11 @@ module.exports = function( grunt ) {
 	
 	// Default task.
 	
-	grunt.registerTask( 'default', ['jshint', 'uglify', 'cssmin'] );
+	grunt.registerTask( 'default', [ 'jshint', 'uglify' ] );
 	
 	grunt.registerTask( 'test', [ 'jshint', 'checktextdomain' ] );
 
-	grunt.registerTask( 'build', [ 'test', 'newer:uglify', 'newer:cssmin', 'pot', 'newer:po2mo', 'wp_readme_to_markdown', 'clean', 'copy', 'compress' ] );
+	grunt.registerTask( 'build', [ 'test', 'uglify', 'pot', 'po2mo', 'wp_readme_to_markdown', 'clean', 'copy', 'compress' ] );
 
 	grunt.registerTask( 'deploy', [ 'checkwpversion', 'checkbranch:master', 'checkrepo:deploy', 'build' ] );
 
