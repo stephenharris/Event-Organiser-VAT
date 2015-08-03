@@ -13,7 +13,7 @@ Adds VAT to booking checkout. Requires Event Organiser & Event Organiser Pro
 Allows you to set a VAT rate to be automatically added to the total checkout price. Ticket prices should be given without VAT applied when set in the admin.
 To set the VAT rate go to *Settings > Event Organiser > Bookings*.
 
-Event Organiser Stripe requires **Event Organiser 2** or higher and **Event Organiser Pro 1.4** or higher
+Event Organiser VAT requires [**Event Organiser 2**](http://wordpress.org/plugins/event-organiser) or higher and [**Event Organiser Pro 1.4**](http://wp-event-organiser.com/pro-features/) or higher
 
 == Installation ==
 
@@ -27,6 +27,8 @@ Event Organiser Stripe requires **Event Organiser 2** or higher and **Event Orga
 
 
 == Screenshots ==
+
+1. VAT at booking checkout
 
 
 == Changelog ==
