@@ -204,6 +204,18 @@ module.exports = function( grunt ) {
     			compare: '==',
     		},
     	},
+    	
+        wp_deploy: {
+        	deploy:{
+                options: {
+            		svn_user: 'stephenharris',
+            		plugin_slug: 'event-organiser-vat',
+            		build_dir: 'build/event-oevent-organiser-vat/',
+            		assets_dir: 'assets/',
+            		max_buffer: 1024*1024
+                },
+        	}
+        }
 
 } );
 	
@@ -215,7 +227,7 @@ module.exports = function( grunt ) {
 
 	grunt.registerTask( 'build', [ 'test', 'uglify', 'pot', 'po2mo', 'wp_readme_to_markdown', 'clean', 'copy', 'compress' ] );
 
-	grunt.registerTask( 'deploy', [ 'checkwpversion', 'checkbranch:master', 'checkrepo:deploy', 'build' ] );
+	grunt.registerTask( 'deploy', [ 'checkwpversion', 'checkbranch:master', 'checkrepo:deploy', 'build', 'wp_deploy' ] );
 
 	grunt.util.linefeed = '\n';
 };
