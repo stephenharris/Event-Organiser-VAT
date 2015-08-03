@@ -49,7 +49,7 @@ function eventorganiservat_init() {
 	$ext = (defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG) ? '' : '.min';
 	
 	//Register scripts
-	wp_register_script( 'eo_pro_vat', EVENTORGANISERVAT_URL . "assets/js/vat{$ext}.js", array( 'eo-wp-js-hooks', 'eo_pro_occurrence_picker'), $version );
+	wp_register_script( 'eo_pro_vat', EVENTORGANISERVAT_URL . "assets/js/vat{$ext}.js", array( 'eo-wp-js-hooks' ), $version );
 	
 	wp_localize_script( 'eo_pro_vat', 'eo_pro_vat', array(
 		'vat_percent' => eventorganiservat_get_vat_percent(),
