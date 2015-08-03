@@ -196,7 +196,7 @@ module.exports = function( grunt ) {
     		plugin_equals_stable: {
     			version1: 'plugin',
     			version2: 'readme',
-    			compare: '!=',
+    			compare: '==',
     		},
     		plugin_equals_package: {
     			version1: 'plugin',
