@@ -2,7 +2,7 @@
   "name": "event-organiser-vat",
   "title": "Event Organiser VAT",
   "description": "Adds VAT to Event Organiser Pro",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "homepage": "http://wp-event-organiser.com",
   "author": {
     "name": "Stephen Harris",
@@ -26,6 +26,7 @@
     "grunt-checkbranch": "~0.2.2",
     "grunt-po2mo": "~0.1.0",
     "grunt-pot": "~0.1.0",
+    "grunt-wp-deploy": "~1.1.0",
 	"grunt-checkwpversion": "~0.3.0"
   },
   "keywords": []
