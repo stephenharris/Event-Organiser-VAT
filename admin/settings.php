@@ -30,4 +30,18 @@ function eventorganiservat_add_settings_fields(){
 		)
 	);
 	
+	add_settings_field(
+		'eo-vat-label',
+		__( 'VAT label', 'event-organiser-vat' ),
+		'eventorganiser_text_field' ,
+		'eventorganiser_bookings',
+		'bookings',
+		array(
+			'type' => 'text',
+			'value' => eventorganiservat_get_vat_label(),
+			'label_for' => 'eo-vat-label',
+			'id' => 'eo-vat-label',
+			'name' => 'eventorganiservat_options[label]',
+		)
+	);
 }
