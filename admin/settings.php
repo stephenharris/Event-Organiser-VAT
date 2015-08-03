@@ -20,7 +20,7 @@ function eventorganiservat_add_settings_fields(){
 		'eventorganiser_bookings', 
 		'bookings',
 		array(
-			'type' => 'number',
+			'type' => 'text',
 			'min' => 0,
 			'max' => 100,
 			'value' => eventorganiservat_get_vat_percent(),

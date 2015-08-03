@@ -1,4 +1,24 @@
 jQuery(document).ready(function($){
+
+	/**
+	 * A fix for the toFixed() rounding errors
+	 * @see http://stackoverflow.com/a/10015178/932391
+	 */
+	var eoVatToFixed = function( number, precision ) {
+		var str = Math.abs(number).toString(),
+			negative = number < 0,
+			lastNumber, mult;
+
+		str        = str.substr(0, str.indexOf('.') + precision + 2);
+		lastNumber = str.charAt(str.length - 1);
+		str        = str.substr(0, str.length - 1);
+	
+		if ( lastNumber >= 5 ) {
+			mult = Math.pow(10, str.length - str.indexOf('.') - 1);
+			str = (+str + 1 / mult).toString();
+		}
+		return str * (negative ? -1 : 1);
+	};
 	
 	/**
 	 * Listens for a change in the checkout total and
@@ -18,7 +38,7 @@ jQuery(document).ready(function($){
 			$('#eo-booking-vat').parents('tr').show();
 		}
 
-		$('#eo-booking-vat').text( parseFloat( vat_amount ).toFixed(2) );
+		$('#eo-booking-vat').text( eoVatToFixed( parseFloat( vat_amount ), 2 ) );
 
 		return cart;
 				
