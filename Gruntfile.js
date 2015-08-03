@@ -210,8 +210,7 @@ module.exports = function( grunt ) {
                 options: {
             		svn_user: 'stephenharris',
             		plugin_slug: 'event-organiser-vat',
-            		build_dir: 'build/event-oevent-organiser-vat/',
-            		assets_dir: 'assets/',
+            		build_dir: 'build/event-organiser-vat/',
             		max_buffer: 1024*1024
                 },
         	}
