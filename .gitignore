@@ -3,3 +3,6 @@ build
 *~
 .*
 !.gitignore
+languages/*.pot
+languages/*.mo
+assets/js/*.min.js
