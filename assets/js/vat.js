@@ -14,11 +14,11 @@ jQuery(document).ready(function($){
 		str        = str.substr(0, str.length - 1);
 	
 		if ( lastNumber >= 5 ) {
-		    mult = Math.pow(10, str.length - str.indexOf('.') - 1);
-		    str = (+str + 1 / mult).toString();
+			mult = Math.pow(10, str.length - str.indexOf('.') - 1);
+			str = (+str + 1 / mult).toString();
 		}
 		return str * (negative ? -1 : 1);
-	}
+	};
 	
 	/**
 	 * Listens for a change in the checkout total and
