@@ -53,7 +53,60 @@ function eventorganiservat_init() {
 	
 	wp_localize_script( 'eo_pro_vat', 'eo_pro_vat', array(
 		'vat_percent' => eventorganiservat_get_vat_percent(),
+		'vat_number_valid' => false,
+		'images_url' => EVENTORGANISERVAT_URL . 'assets/images/',
+		'ajax_url' => admin_url( 'admin-ajax.php' ),
 	));
 
 }
 add_action( 'init', 'eventorganiservat_init' );
+
+spl_autoload_register(function ($class_name) {
+	$map = array(
+		'EO_Booking_Form_Element_Vat_Number_View' => EVENTORGANISERVAT_DIR . 'includes/class-eo-booking-form-element-vat-number-view.php',
+		'EO_Booking_Form_Element_Vat_Number' => EVENTORGANISERVAT_DIR . 'includes/class-eo-booking-form-element-vat-number.php',
+		'EO_Vat_Validation' => EVENTORGANISERVAT_DIR . 'includes/lib/class-eo-vat-validation.php',
+	);
+
+	if ( isset( $map[$class_name] ) ) {
+		include $map[$class_name];
+	}
+});
+
+add_filter( 'eventorganiser_booking_form_element_types', function($elements){
+	$elements['advanced']['vat-number'] = 'EO_Booking_Form_Element_Vat_Number';
+	return $elements;
+} );
+
+add_action( 'admin_footer-settings_page_event-settings',function(){
+	?>
+	<script>
+		eo.bfc.Model.EOFormElementVatNumber = eo.bfc.Model.EOFormElementInput.extend({
+			defaults:{
+				label: eo.gettext("VAT Number"),
+				name: eo.gettext("VAT Number"),
+				placeholder: '',
+				description: "",
+				required: false,
+				field_type: 'text',
+				parent: 0,
+			},
+		});
+	</script>
+	<?php
+}, 20 );
+
+
+add_action( 'wp_ajax_eventorganiser-check-vat-number', 'eventorganiser_vat_verify_vat_number' );
+add_action( 'wp_ajax_nopriv_eventorganiser-check-vat-number', 'eventorganiser_vat_verify_vat_number' );
+function eventorganiser_vat_verify_vat_number() {
+
+	$vat_validation = new EO_Vat_Validation();
+	$valid = $vat_validation->check( $_GET['vat_number'] );
+
+	wp_send_json(array(
+		'vat_number' => $vat_number,
+		'vat_number_hash' => $valid ? wp_hash( $vat_number ) : false,
+		'valid' => $valid
+	));
+}
