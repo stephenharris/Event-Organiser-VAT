@@ -5,6 +5,12 @@ jQuery(document).ready(function($){
 	 * @see http://stackoverflow.com/a/10015178/932391
 	 */
 	var eoVatToFixed = function( number, precision ) {
+
+		// If number is integer, append zeros.
+		if ( number % 1 === 0 ) {
+			return number.toFixed(precision);
+		};
+
 		var str = Math.abs(number).toString(),
 			negative = number < 0,
 			lastNumber, mult;
