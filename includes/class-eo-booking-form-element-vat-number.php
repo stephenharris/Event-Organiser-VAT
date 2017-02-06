@@ -7,12 +7,12 @@ class EO_Booking_Form_Element_Vat_Number extends EO_Booking_Form_Element_Input{
 	var $default_view = 'EO_Booking_Form_Element_Vat_Number_View';
 
 	static function get_type_name(){
-		return __( 'VAT number', 'eventorganiservat' );
+		return __( 'VAT number', 'event-organiser-vat' );
 	}
 
 	function get_defaults(){
 		return array(
-			'label' => __( 'VAT number', 'eventorganiservat' ),
+			'label' => __( 'VAT number', 'event-organiser-vat' ),
 		);
 	}
 
