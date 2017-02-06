@@ -9,7 +9,7 @@ jQuery(document).ready(function($){
 		// If number is integer, append zeros.
 		if ( number % 1 === 0 ) {
 			return number.toFixed(precision);
-		};
+		}
 
 		var str = Math.abs(number).toString(),
 			negative = number < 0,
@@ -33,7 +33,7 @@ jQuery(document).ready(function($){
 		}else{
 			$('.eo-booking-ticket-qty input').first().trigger('change');
 		}
-	}
+	};
 
 	$( '.eo-booking-field-vat-number' ).on( 'blur', function() {
 		var $input = $(this);
