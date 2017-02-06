@@ -4,17 +4,25 @@ module.exports = function( grunt ) {
 
 	// Project configuration
 	grunt.initConfig( {
-		pkg:    grunt.file.readJSON( 'package.json' ),
+		pkg: grunt.file.readJSON( 'package.json' ),
+
+		gitinfo: {
+			commands: {
+				'local.tag.current.name': ['name-rev', '--tags', '--name-only', 'HEAD'],
+				'local.tag.current.nameLong': ['describe', '--tags', '--long']
+			}
+		},
+
 		jshint: {
 			options: {
 				reporter: require('jshint-stylish'),
 				globals: {
 					"EVENT_ORGANISER_VAT_SCRIPT_DEBUG": false,
 				},
-				 '-W020': true, //Read only - error when assigning EO_SCRIPT_DEBUG a value.
+				'-W020': true, //Read only - error when assigning EO_SCRIPT_DEBUG a value.
 			},
 			all: [ 'assets/js/*.js', '!assets/js/*.min.js', '!assets/js/vendor/**.js' ]
-  		},
+		},
 
 		uglify: {
 			all: {
@@ -30,38 +38,28 @@ module.exports = function( grunt ) {
 						"EVENT_ORGANISER_VAT_SCRIPT_DEBUG": false,
 					},
 					dead_code: true
-		      		},
-				banner: '/*! <%= pkg.title %> - v<%= pkg.version %>\n' +
-					' * <%= pkg.homepage %>\n' +
-					' */\n',
+				},
+				banner: '/*! <%= pkg.name %> <%= gitinfo.local.tag.current.nameLong %> <%= grunt.template.today("yyyy-mm-dd HH:MM") %> */\n',
 				mangle: {
 					except: ['jQuery']
 				}
 			},
 		},
-		
-		watch:  {			
-    			readme: {
-    	    			files: ['readme.txt'],
-    	    			tasks: ['wp_readme_to_markdown'],
-    	    			options: {
-					spawn: false,
-				},
-    	  		},
 
-		      	scripts: {
+		watch:  {
+			scripts: {
 				files: ['assets/js/*.js'],
 				tasks: ['newer:jshint','newer:uglify'],
-    	   			 options: {
+				options: {
 					spawn: false,
 				},
 			},
 		},
-		
+
 		clean: {
 			main: ['build/<%= pkg.name %>']
 		},
-		
+
 		copy: {
 			// Copy the plugin to a versioned release directory
 			main: {
@@ -82,8 +80,23 @@ module.exports = function( grunt ) {
 					'!vendor/**',
 					'!*~'
 				],
-				dest: 'build/<%= pkg.name %>/'
-			}		
+				dest: 'build/<%= pkg.name %>/',
+				options: {
+					processContentExclude: ['**/*', '!event-organiser-vat.php','!readme.md'],
+					processContent: function(content, srcpath) {
+						if (srcpath == 'readme.md' || srcpath == 'event-organiser-vat.php') {
+							console.log( grunt.config.get('gitinfo').local.tag.current );
+							console.log( grunt.config.get('gitinfo').local.tag );
+							if (grunt.config.get('gitinfo').local.tag.current.name !== 'undefined') {
+								content = content.replace('{{version}}', grunt.config.get('gitinfo').local.tag.current.name);
+							} else {
+								content = content.replace('{{version}}', grunt.config.get('gitinfo').local.tag.current.nameLong);
+							}
+						}
+						return content;
+					},
+				},
+			}
 		},
 
 		compress: {
@@ -96,7 +109,7 @@ module.exports = function( grunt ) {
 				cwd: 'build/<%= pkg.name %>/',
 				src: ['**/*'],
 				dest: 'event_organiser_vat/'
-			},	
+			},
 		},
 
 		po2mo: {
@@ -117,11 +130,11 @@ module.exports = function( grunt ) {
 					'esc_html__:1',
 					'esc_html_e:1',
 					'esc_html_x:1,2c',
-					'esc_attr__:1', 
-					'esc_attr_e:1', 
-					'esc_attr_x:1,2c', 
+					'esc_attr__:1',
+					'esc_attr_e:1',
+					'esc_attr_x:1,2c',
 					'_ex:1,2c',
-					'_n:1,2', 
+					'_n:1,2',
 					'_nx:1,2,4c',
 					'_n_noop:1,2',
 					'_nx_noop:1,2,3c'
@@ -151,11 +164,11 @@ module.exports = function( grunt ) {
 				'esc_html__:1,2d',
 				'esc_html_e:1,2d',
 				'esc_html_x:1,2c,3d',
-				'esc_attr__:1,2d', 
-				'esc_attr_e:1,2d', 
-				'esc_attr_x:1,2c,3d', 
+				'esc_attr__:1,2d',
+				'esc_attr_e:1,2d',
+				'esc_attr_x:1,2c,3d',
 				'_ex:1,2c,3d',
-				'_n:1,2,4d', 
+				'_n:1,2,4d',
 				'_nx:1,2,4c,5d',
 				'_n_noop:1,2,3d',
 				'_nx_noop:1,2,3c,4d'
@@ -174,59 +187,35 @@ module.exports = function( grunt ) {
     		},
     	},
 
-    	wp_readme_to_markdown: {
-    		convert:{
-    			files: {
-    				'readme.md': 'readme.txt'
-    			},
-    		},
-    	},
-
     	checkrepo: {
     		deploy: {
-    			tag: {
-    				eq: '<%= pkg.version %>',    // Check if highest repo tag is equal to pkg.version
-    			},
     			tagged: true, // Check if last repo commit (HEAD) is not tagged
     			clean: true,   // Check if the repo working directory is clean
-        	}
-    	},
-	
-    	checkwpversion: {
-    		plugin_equals_stable: {
-    			version1: 'plugin',
-    			version2: 'readme',
-    			compare: '==',
-    		},
-    		plugin_equals_package: {
-    			version1: 'plugin',
-    			version2: '<%= pkg.version %>',
-    			compare: '==',
-    		},
-    	},
-    	
-        wp_deploy: {
-        	deploy:{
-                options: {
-            		svn_user: 'stephenharris',
-            		plugin_slug: 'event-organiser-vat',
-            		build_dir: 'build/event-organiser-vat/',
-            		max_buffer: 1024*1024
-                },
-        	}
         }
+    	},
+
+			wp_deploy: {
+				deploy:{
+					options: {
+						svn_user: 'stephenharris',
+						plugin_slug: 'event-organiser-vat',
+						build_dir: 'build/event-organiser-vat/',
+						max_buffer: 1024*1024
+					},
+				}
+			}
 
 } );
-	
+
 	// Default task.
-	
-	grunt.registerTask( 'default', [ 'jshint', 'uglify' ] );
-	
+
+	grunt.registerTask( 'default', [ 'gitinfo', 'jshint', 'uglify' ] );
+
 	grunt.registerTask( 'test', [ 'jshint', 'checktextdomain' ] );
 
-	grunt.registerTask( 'build', [ 'test', 'uglify', 'pot', 'po2mo', 'wp_readme_to_markdown', 'clean', 'copy', 'compress' ] );
+	grunt.registerTask( 'build', [ 'gitinfo', 'test', 'uglify', 'pot', 'po2mo', 'clean', 'copy', 'compress' ] );
 
-	grunt.registerTask( 'deploy', [ 'checkwpversion', 'checkbranch:master', 'checkrepo:deploy', 'build', 'wp_deploy' ] );
+	grunt.registerTask( 'deploy', [ 'checkbranch:master', 'checkrepo:deploy', 'build', 'wp_deploy' ] );
 
 	grunt.util.linefeed = '\n';
 };
