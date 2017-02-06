@@ -85,8 +85,6 @@ module.exports = function( grunt ) {
 					processContentExclude: ['**/*', '!event-organiser-vat.php','!readme.md'],
 					processContent: function(content, srcpath) {
 						if (srcpath == 'readme.md' || srcpath == 'event-organiser-vat.php') {
-							console.log( grunt.config.get('gitinfo').local.tag.current );
-							console.log( grunt.config.get('gitinfo').local.tag );
 							if (grunt.config.get('gitinfo').local.tag.current.name !== 'undefined') {
 								content = content.replace('{{version}}', grunt.config.get('gitinfo').local.tag.current.name);
 							} else {
@@ -103,7 +101,7 @@ module.exports = function( grunt ) {
 			main: {
 				options: {
 					mode: 'zip',
-					archive: './build/event_organiser_vat.<%= pkg.version %>.zip'
+					archive: './build/event_organiser_vat.<%= gitinfo.local.tag.current.nameLong %>.zip'
 				},
 				expand: true,
 				cwd: 'build/<%= pkg.name %>/',
