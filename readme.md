@@ -2,7 +2,7 @@
 **Contributors:** stephenharris  
 **Donate link:** http://wp-event-organiser.com  
 **Requires at least:** 3.3  
-**Tested up to:** 4.2.3  
+**Tested up to:** 4.7.2  
 **Stable tag:** {{version}}  
 **License:** GPLv2 or later  
 
@@ -34,6 +34,10 @@ Event Organiser VAT requires [**Event Organiser 2**](http://wordpress.org/plugin
 
 
 ## Changelog ##
+
+### 1.1.0 ###
+
+* Adds ability to add a 'VAT Number' field. When a valid VAT number is entered, the VAT is removed.
 
 ### 1.0.4 ###
 * Supports decimal point percentages
