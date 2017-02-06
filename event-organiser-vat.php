@@ -42,15 +42,15 @@ require_once( EVENTORGANISERVAT_DIR . 'admin/settings.php' );
  * - Registers the default textdomain.
  */
 function eventorganiservat_init() {
-	
+
 	load_plugin_textdomain( 'event-organiser-vat', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
 	$version = defined( 'EVENTORGANISERVAT_VERSION' ) ? EVENTORGANISERVAT_VERSION : false;
 	$ext = (defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG) ? '' : '.min';
-	
+
 	//Register scripts
 	wp_register_script( 'eo_pro_vat', EVENTORGANISERVAT_URL . "assets/js/vat{$ext}.js", array( 'eo-wp-js-hooks' ), $version );
-	
+
 	wp_localize_script( 'eo_pro_vat', 'eo_pro_vat', array(
 		'vat_percent' => eventorganiservat_get_vat_percent(),
 		'vat_number_valid' => false,
