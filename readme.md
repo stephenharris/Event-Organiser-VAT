@@ -2,7 +2,7 @@
 **Contributors:** stephenharris  
 **Donate link:** http://wp-event-organiser.com  
 **Requires at least:** 3.3  
-**Tested up to:** 4.2.3  
+**Tested up to:** 4.3.0  
 **Stable tag:** 1.0.4  
 **License:** GPLv2 or later  
 
@@ -35,12 +35,14 @@ Event Organiser VAT requires [**Event Organiser 2**](http://wordpress.org/plugin
 
 ## Changelog ##
 
-### 1.0.4 ###
-* Supports decimal point percentages
+### 1.0.5 ###
 * Fixes rounding errors
 
+### 1.0.4 ###
+* Supports decimal point percentages
+
 ### 1.0.3 ###
-* Added option for "VAT" label 
+* Added option for "VAT" label
 
 ### 1.0.2 ###
 * Initial release
