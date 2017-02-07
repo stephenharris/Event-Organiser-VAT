@@ -2,40 +2,29 @@ jQuery(document).ready(function($){
 
 	/**
 	 * A fix for the toFixed() rounding errors
-	 * @see http://stackoverflow.com/a/10015178/932391
 	 */
 	var eoVatToFixed = function( number, precision ) {
 
-		// If number is integer, append zeros.
-		if ( number % 1 === 0 ) {
-			return number.toFixed(precision);
-		};
+		precision = ( typeof precision == 'undefined' ? 0 : precision );
 
-		var str = Math.abs(number).toString(),
-			negative = number < 0,
-			lastNumber, mult;
+		//Lets ensure the part we want to keep is the (rounded) integer
+		var roundedInt   = Math.round( number * Math.pow( 10, precision ) );
+		var roundedFloat = roundedInt /  Math.pow( 10, precision );
 
-		str        = str.substr(0, str.indexOf('.') + precision + 2);
-		lastNumber = str.charAt(str.length - 1);
-		str        = str.substr(0, str.length - 1);
-	
-		if ( lastNumber >= 5 ) {
-			mult = Math.pow(10, str.length - str.indexOf('.') - 1);
-			str = (+str + 1 / mult).toString();
-		}
-		return str * (negative ? -1 : 1);
+		//Ensure the appropriate number of decimal points are returned
+		return roundedFloat.toPrecision( roundedInt.toString().length );
 	};
-	
+
 	/**
 	 * Listens for a change in the checkout total and
 	 * adds the appropriate about of VAT. If VAT amount
-	 * is above 0, show VAT row, otherwise hide it. 
+	 * is above 0, show VAT row, otherwise hide it.
 	 */
 	wp.hooks.addFilter( 'eventorganiser.checkout_cart', function( cart ){
 
 		var vat = eo_pro_vat.vat_percent;
 		var vat_amount = cart.total*(vat/100);
-		
+
 		cart.total = cart.total + vat_amount;
 
 		if( vat_amount === 0 ){
@@ -44,10 +33,10 @@ jQuery(document).ready(function($){
 			$('#eo-booking-vat').parents('tr').show();
 		}
 
-		$('#eo-booking-vat').text( eoVatToFixed( parseFloat( vat_amount ), 2 ) );
+		$('#eo-booking-vat').text( eoVatToFixed( parseFloat( vat_amount, 2 ), 2 ) );
 
 		return cart;
-				
+
 	}, 100 );
 
 });
