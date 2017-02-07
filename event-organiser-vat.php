@@ -3,7 +3,7 @@
  * Plugin Name: Event Organiser VAT
  * Plugin URI:  http://wp-event-organiser.com
  * Description: Adds VAT to Event Organiser Pro
- * Version:     1.0.4
+ * Version:     1.0.5
  * Author:      Stephen Harris
  * Author URI:  http://wp-event-organiser.com
  * License:     GPLv2+
@@ -30,7 +30,7 @@
  */
 
 // Useful global constants
-define( 'EVENTORGANISERVAT_VERSION', '1.0.4' );
+define( 'EVENTORGANISERVAT_VERSION', '1.0.5' );
 define( 'EVENTORGANISERVAT_URL', plugin_dir_url( __FILE__ ) );
 define( 'EVENTORGANISERVAT_DIR', plugin_dir_path( __FILE__ ) );
 
@@ -42,15 +42,15 @@ require_once( EVENTORGANISERVAT_DIR . 'admin/settings.php' );
  * - Registers the default textdomain.
  */
 function eventorganiservat_init() {
-	
+
 	load_plugin_textdomain( 'event-organiser-vat', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
 	$version = defined( 'EVENTORGANISERVAT_VERSION' ) ? EVENTORGANISERVAT_VERSION : false;
 	$ext = (defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG) ? '' : '.min';
-	
+
 	//Register scripts
 	wp_register_script( 'eo_pro_vat', EVENTORGANISERVAT_URL . "assets/js/vat{$ext}.js", array( 'eo-wp-js-hooks' ), $version );
-	
+
 	wp_localize_script( 'eo_pro_vat', 'eo_pro_vat', array(
 		'vat_percent' => eventorganiservat_get_vat_percent(),
 	));
