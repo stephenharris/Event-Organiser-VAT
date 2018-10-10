@@ -89,7 +89,7 @@ function _eventorganiservat_store_vat( $booking_id  ){
 	//New booking, so VAT won't be stored yet, so below returns pre-vat total price
 	$amount = floatval( eo_get_booking_meta( $booking_id, 'booking_amount', true )  );
 	$vat = eventorganiservat_get_vat_percent();
-	$vat_amount = number_format( ($vat * $amount )/100, 2 );
+	$vat_amount = round( ($vat * $amount )/100, 2 );
 	
 	update_post_meta( $booking_id, '_eo_booking_vat_percent', $vat );
 	update_post_meta( $booking_id, '_eo_booking_vat_amount', $vat_amount  );
